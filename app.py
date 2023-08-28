@@ -8,11 +8,11 @@ import io
 import joblib
 
 app = Flask(__name__)
-# Define the custom optimizer implementation
+
 class CustomRMSprop(RMSprop):
     pass
 
-# Load the model with the custom optimizer
+
 model_image = load_model('my_model.h5', custom_objects={'CustomRMSprop': CustomRMSprop})
 model_image = load_model('my_model.h5', custom_objects={'RMSprop': RMSprop})
 model_data = joblib.load('model.pkl')
@@ -34,13 +34,12 @@ def predict_image():
 
 @app.route('/predict_data', methods=['POST'])
 def predict_data():
-    # Get the data from the POST request
+
     data = request.get_json(force=True)
     
-    # Make a prediction using the model
+
     predictions = model_data.predict([list(data.values())])
-    
-    # Send back the result as JSON
+
     return jsonify(predictions.tolist())
 
 if __name__ == '__main__':
