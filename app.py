@@ -6,9 +6,9 @@ from PIL import Image
 import numpy as np
 import io
 import joblib
-
+from flask_cors import CORS
 app = Flask(__name__)
-
+CORS(app) 
 class CustomRMSprop(RMSprop):
     pass
 
@@ -42,5 +42,11 @@ def predict_data():
 
     return jsonify(predictions.tolist())
 
+
+@app.route('/')
+def hello_world():
+    return 'Hello,!'
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=4000, debug=True)
