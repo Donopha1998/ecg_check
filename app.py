@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 import io
 import joblib
+import os
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) 
@@ -49,4 +50,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+   app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 6000)))
